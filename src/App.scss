@@ -1,21 +1,9 @@
 .App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 20px;
-  color: rgb(5, 5, 5);
-  font-style: italic;
 }
 
 .App-header__Form {
   position: absolute;
-  top: 10px;
+  top: 80px;
   right: 50px;
   background-color: white;
   border-radius: 30px;
@@ -27,6 +15,10 @@
 
 .Form:hover {
   box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
+}
+
+.App__ChatList {
+  padding-left: 10px;
 }
 
 .App-header__Button {
@@ -69,6 +61,23 @@
   left: 50px;
 }
 
-.MuiList-padding {
-  right: 400px;
+.btn-primary.active {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  margin-right: 10px;
+}
+
+.btn-primary.active:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-primary {
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.btn-primary.active {
+  margin-left: 0px;
+  background-color: transparent;
 }

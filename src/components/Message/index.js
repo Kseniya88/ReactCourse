@@ -1,11 +1,10 @@
 import React from "react";
 import "./../../App.scss";
 
-const Message = ({ text, name }) => {
+const Message = ({ text }) => {
   return (
     <>
-      <div>{text}</div>
-      <div>{name}</div>
+      <div className="App__ChatList">{text}</div>
     </>
   );
 };

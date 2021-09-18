@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import Message from "../Message";
 import { v4 as uuid } from "uuid";
 import { StylesProvider } from "@material-ui/core/styles";
+import Message from "../Message";
 import AUTHORS from "../Utils/constants.js";
 import { Form } from "../Form";
 import { ChatList } from "../ChatList";
@@ -16,21 +16,20 @@ const initialMessages = {
 };
 
 const initialChats = [
-  { name: "Space", author: "HUMAN", id: uuid() },
-  { name: "Universal", author: "HUMAN", id: uuid() },
+  { name: "Space", id: "chat-1" },
+  { name: "Universal", id: "chat-2" },
 ];
 
 function Chats(props) {
   const { chatId } = useParams();
-  const [messages, setMessages] = useState(initialMessages);
   const [chats, setChats] = useState(initialChats);
-  const inputRef = useRef(null);
+  const [messages, setMessages] = useState(initialMessages);
 
   const sendMessage = useCallback(
     (message) => {
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [chatId]: [...prevMessages[chatId], message],
+      setMessages((prevMess) => ({
+        ...prevMess,
+        [chatId]: [...prevMess[chatId], message],
       }));
     },
     [chatId]
@@ -41,46 +40,37 @@ function Chats(props) {
     const curMess = messages[chatId];
     if (!!chatId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN) {
       timer = setTimeout(() => {
-        sendMessage({ text: "Привет", author: AUTHORS.BOT, id: uuid() });
+        sendMessage({ text: "Hi! I am bot)", author: AUTHORS.BOT, id: uuid() });
       }, 1500);
     }
 
     return () => clearTimeout(timer);
   }, [messages]);
 
-  const handleSubmit = useCallback(
+  const handleAddMessage = useCallback(
     (text) => {
       sendMessage({
-        text: inputRef.current.value,
+        text,
         author: AUTHORS.HUMAN,
         id: uuid(),
       });
     },
     [chatId, sendMessage]
   );
-
   return (
     <>
       <div className="App">
-        <header className="App-header">
-          <StylesProvider injectFirst>
-            <ChatList chats={chats} onAddChat />
-            <form onSubmit={handleSubmit}>
-              {!!chatId && (
-                <>
-                  {messages[chatId].map((message) => (
-                    <Message
-                      key={message.id}
-                      text={message.text}
-                      id={message.id}
-                    />
-                  ))}
-                </>
-              )}
-              <Form />
-            </form>
-          </StylesProvider>
-        </header>
+        {/* <header className="App-header"> */}
+        <ChatList chats={chats} onAddChat />
+        {!!chatId && (
+          <>
+            {messages[chatId].map((message) => (
+              <Message key={message.id} text={message.text} id={message.id} />
+            ))}
+            <Form onSubmit={handleAddMessage} />
+          </>
+        )}
+        {/* </header> */}
       </div>
     </>
   );

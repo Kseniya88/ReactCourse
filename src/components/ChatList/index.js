@@ -1,17 +1,13 @@
-import { List, ListItem } from "@material-ui/core";
-import Button from "./../Button";
-import AccesAlarmIcon from "@material-ui/icons/AccessAlarm";
-import { Link } from "react-router-dom";
 import React from "react";
+import { List } from "@material-ui/core";
 import "./../../App.scss";
+import { ChatItem } from "../ChatItem";
 
 export const ChatList = ({ chats }) => {
   return (
     <List>
       {chats.map((chat) => (
-        <ListItem key={chat.id}>
-          <Link to={`/chats/${chat.id}`}>{chat.name}</Link>
-        </ListItem>
+        <ChatItem chat={chat} key={chat.id} />
       ))}
     </List>
   );

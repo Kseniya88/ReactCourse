@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "./../Button";
 import IconLabelButtons from "../IconLabelButtons";
 import { StylesProvider } from "@material-ui/core/styles";
-import "./../../App.scss";
 
 export const Form = ({ onSubmit }) => {
   const [value, setValue] = useState("");
@@ -13,8 +12,8 @@ export const Form = ({ onSubmit }) => {
     setValue(event.target.value);
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSubmit(value);
     setValue("");
 
@@ -33,11 +32,9 @@ export const Form = ({ onSubmit }) => {
             onChange={handleChange}
             autoFocus={true}
           />
-          <button className="App-header__Button">
-            <Button>
-              <IconLabelButtons />
-            </Button>
-          </button>
+          <Button>
+            <IconLabelButtons />
+          </Button>
         </form>
       </StylesProvider>
     </>

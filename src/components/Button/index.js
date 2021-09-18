@@ -1,9 +1,7 @@
 import React from "react";
-import IconLabelButtons from "../IconLabelButtons";
-import "./../../App.scss";
 
 const Button = ({ children }) => {
-  return <div>{children}</div>;
+  return <button className="App-header__Button">{children}</button>;
 };
 
 export default Button;
