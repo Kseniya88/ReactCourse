@@ -12,7 +12,7 @@ import "./../../App.scss";
 export const Routes = () => {
   return (
     <BrowserRouter>
-      <nav class="navbar navbar-dark bg-dark">
+      <nav className="navbar navbar-dark bg-dark">
         <ButtonToolbar className="custom-btn-toolbar">
           <LinkContainer to="/">
             <Button variant="primary">HOME</Button>
@@ -24,15 +24,6 @@ export const Routes = () => {
             <Button>CHATS</Button>
           </LinkContainer>
         </ButtonToolbar>
-        {/* <div>
-          <Link to="/chats">CHATS</Link>
-        </div>
-        <div>
-          <Link to="/profile">PROFILE</Link>
-        </div>
-        <div>
-          <Link to="/">HOME</Link>
-        </div> */}
       </nav>
 
       <Switch>

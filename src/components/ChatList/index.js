@@ -1,14 +1,20 @@
-import React from "react";
 import { List } from "@material-ui/core";
 import "./../../App.scss";
-import { ChatItem } from "../ChatItem";
+import { GutterlessList } from "../ChatItem";
+import { AddChatList } from "../AddChatList";
 
-export const ChatList = ({ chats }) => {
+export const ChatList = ({ chats, onDeleteChat, onAddChat }) => {
   return (
     <List>
       {chats.map((chat) => (
-        <ChatItem chat={chat} key={chat.id} />
+        <GutterlessList
+          chat={chat}
+          key={chat.id}
+          id={chat.id}
+          onDelete={onDeleteChat}
+        />
       ))}
+      <AddChatList onAddChat={onAddChat} />
     </List>
   );
 };

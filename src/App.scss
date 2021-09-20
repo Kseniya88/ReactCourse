@@ -18,7 +18,9 @@
 }
 
 .App__ChatList {
-  padding-left: 10px;
+  position: unset;
+  text-align: right;
+  margin-right: 70px;
 }
 
 .App-header__Button {
@@ -80,4 +82,24 @@
 .btn-primary.active {
   margin-left: 0px;
   background-color: transparent;
+}
+
+.btn-delete-chat {
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #1976d2;
+  color: white;
+}
+
+.MuiListItem-root {
+  width: 30%;
+}
+
+.btn-add-chat-list {
+  margin-left: 5px;
+}
+
+.MuiFormControl-root {
+  vertical-align: bottom;
+  margin-left: 30px;
 }

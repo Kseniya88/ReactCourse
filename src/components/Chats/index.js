@@ -1,76 +1,50 @@
-import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { v4 as uuid } from "uuid";
-import { StylesProvider } from "@material-ui/core/styles";
-import Message from "../Message";
-import AUTHORS from "../Utils/constants.js";
-import { Form } from "../Form";
+import { useCallback, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import { ChatList } from "../ChatList";
+import { addChat, deleteChat } from "../../components/Store/Chats/actions";
+import AddDeleteMessages from "../Message/AddDeleteMessages";
 
-const initialMessages = {
-  "chat-1": [
-    { text: "Sky", author: "HUMAN", id: uuid() },
-    { text: "Sun", author: "HUMAN", id: uuid() },
-  ],
-  "chat-2": [],
-};
-
-const initialChats = [
-  { name: "Space", id: "chat-1" },
-  { name: "Universal", id: "chat-2" },
-];
-
-function Chats(props) {
+function Chats() {
   const { chatId } = useParams();
-  const [chats, setChats] = useState(initialChats);
-  const [messages, setMessages] = useState(initialMessages);
+  const dispatch = useDispatch();
+  const chats = useSelector((state) => state.chats.chats);
+  const history = useHistory(); // возвращает различные методы
 
-  const sendMessage = useCallback(
-    (message) => {
-      setMessages((prevMess) => ({
-        ...prevMess,
-        [chatId]: [...prevMess[chatId], message],
-      }));
+  const handleAddChat = useCallback(
+    (name) => {
+      dispatch(addChat(name));
     },
-    [chatId]
+    [dispatch]
   );
 
-  useEffect(() => {
-    let timer;
-    const curMess = messages[chatId];
-    if (!!chatId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN) {
-      timer = setTimeout(() => {
-        sendMessage({ text: "Hi! I am bot)", author: AUTHORS.BOT, id: uuid() });
-      }, 1500);
-    }
+  const handleDeleteChat = useCallback(
+    (id) => {
+      dispatch(deleteChat(id));
 
-    return () => clearTimeout(timer);
-  }, [messages]);
+      // не находимся ли мы на странице чата, которую удаляем
+      if (chatId !== id) {
+        return;
+      }
 
-  const handleAddMessage = useCallback(
-    (text) => {
-      sendMessage({
-        text,
-        author: AUTHORS.HUMAN,
-        id: uuid(),
-      });
+      if (chats.length === 1) {
+        history.push(`/chats/${chats[0].id}`);
+      } else {
+        history.push(`/chats`);
+      }
     },
-    [chatId, sendMessage]
+    [chatId, dispatch, chats, history]
   );
+
   return (
     <>
       <div className="App">
-        {/* <header className="App-header"> */}
-        <ChatList chats={chats} onAddChat />
-        {!!chatId && (
-          <>
-            {messages[chatId].map((message) => (
-              <Message key={message.id} text={message.text} id={message.id} />
-            ))}
-            <Form onSubmit={handleAddMessage} />
-          </>
-        )}
-        {/* </header> */}
+        <ChatList
+          chats={chats}
+          onAddChat={handleAddChat}
+          onDeleteChat={handleDeleteChat}
+        />
+        <AddDeleteMessages />
       </div>
     </>
   );
