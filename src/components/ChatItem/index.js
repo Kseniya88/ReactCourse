@@ -1,4 +1,4 @@
-import { Icon, List } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import CommentIcon from "@material-ui/icons/Comment";
@@ -7,7 +7,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { StylesProvider } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-export function GutterlessList({ chat, onDelete, id }) {
+export function ChatItem({ chat, onDelete, id }) {
   const handleDelete = () => {
     onDelete(id);
   };
@@ -30,4 +30,4 @@ export function GutterlessList({ chat, onDelete, id }) {
   );
 }
 
-export default GutterlessList;
+export default ChatItem;

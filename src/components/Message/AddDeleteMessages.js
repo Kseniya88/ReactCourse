@@ -1,10 +1,11 @@
-import { useEffect, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
+import { FormCont } from "../Form/formCont";
 import Message from "../Message";
 import AUTHORS from "../Utils/constants.js";
-import { Form } from "../Form";
-import { addMessage } from "../Store/Messages/actions";
+import { addMessageWithReply } from "../Store/Messages/actions";
 import { selectIfChatExists } from "../Store/Chats/selectors";
 
 function AddDeleteMessages() {
@@ -17,22 +18,10 @@ function AddDeleteMessages() {
 
   const sendMessage = useCallback(
     (text, author) => {
-      dispatch(addMessage(chatId, text, author));
+      dispatch(addMessageWithReply(chatId, text, author));
     },
     [chatId]
   );
-
-  useEffect(() => {
-    let timer;
-    const curMess = messages[chatId];
-    if (!!chatId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN) {
-      timer = setTimeout(() => {
-        sendMessage("Hi! I am bot)", AUTHORS.BOT);
-      }, 1500);
-    }
-
-    return () => clearTimeout(timer);
-  }, [messages]);
 
   const handleAddMessage = useCallback(
     (text) => {
@@ -49,7 +38,7 @@ function AddDeleteMessages() {
             {(messages[chatId] || []).map((message) => (
               <Message key={message.id} text={message.text} id={message.id} />
             ))}
-            <Form onSubmit={handleAddMessage} />
+            <FormCont onSubmit={handleAddMessage} />
           </>
         )}
       </div>
