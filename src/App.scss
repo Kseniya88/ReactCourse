@@ -1,0 +1,105 @@
+.App {
+}
+
+.App-header__Form {
+  position: absolute;
+  top: 80px;
+  right: 50px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(33, 33, 33, 0.2);
+}
+
+.Form:hover {
+  box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
+}
+
+.App__ChatList {
+  position: unset;
+  text-align: right;
+  margin-right: 70px;
+}
+
+.App-header__Button {
+  background: transparent;
+  border: none !important;
+}
+
+.App-header__Message {
+  position: absolute;
+  top: 100px;
+  right: 70px;
+  text-align: right;
+  width: auto;
+  padding-left: 450px;
+  word-break: break-word;
+}
+
+.MuiSvgIcon-root {
+  margin-left: 5px;
+}
+
+.MuiIcon-root {
+  display: none;
+}
+
+.MuiButton-endIcon {
+  margin-left: 0px;
+}
+
+.MuiButton-containedPrimary {
+  background-color: royalblue;
+}
+
+.Send {
+  font-weight: bold;
+}
+
+.App-header__Chats {
+  position: absolute;
+  left: 50px;
+}
+
+.btn-primary.active {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  margin-right: 10px;
+}
+
+.btn-primary.active:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-primary {
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.btn-primary.active {
+  margin-left: 0px;
+  background-color: transparent;
+}
+
+.btn-delete-chat {
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #1976d2;
+  color: white;
+}
+
+.MuiListItem-root {
+  width: 30%;
+}
+
+.btn-add-chat-list {
+  margin-left: 5px;
+}
+
+.MuiFormControl-root {
+  vertical-align: bottom;
+  margin-left: 30px;
+}
