@@ -6,7 +6,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import Button from "react-bootstrap/Button";
 import Chats from "../Chats";
 import Home from "../Home";
-import Profile from "../Profile";
+import Profile from "../Profile/profileCont";
+import { News } from "../News";
 import "./../../App.scss";
 
 export const Routes = () => {
@@ -23,6 +24,9 @@ export const Routes = () => {
           <LinkContainer to="/chats">
             <Button>CHATS</Button>
           </LinkContainer>
+          <LinkContainer to="/news">
+            <Button>NEWS</Button>
+          </LinkContainer>
         </ButtonToolbar>
       </nav>
 
@@ -36,6 +40,7 @@ export const Routes = () => {
         <Route path="/profile/:profile?">
           <Profile />
         </Route>
+        <Route path="/news" component={News}></Route>
         <Route>
           <h1>Page Not Found</h1>
           <h1>404</h1>

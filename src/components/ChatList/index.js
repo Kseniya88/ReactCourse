@@ -1,7 +1,7 @@
 import { List } from "@material-ui/core";
 import "./../../App.scss";
 import { ChatItem } from "../ChatItem";
-import { AddChatListCont } from "../AddChatList/AddChatListCont";
+import { AddChatListCont } from "../AddChatList/addChatListCont";
 
 export const ChatList = ({ chats, onDeleteChat, onAddChat }) => {
   return (
