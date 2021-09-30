@@ -1,16 +1,23 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { FormCont } from "../Form/formCont";
 import Message from "../Message";
 import AUTHORS from "../Utils/constants.js";
-import { addMessageWithReply } from "../Store/Messages/actions";
+import { addMessageFb, initMessages } from "../Store/Messages/actions";
 import { selectIfChatExists } from "../Store/Chats/selectors";
+import { initChats } from "../Store/Chats/actions";
 
 function AddDeleteMessages() {
   const { chatId } = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initChats());
+    dispatch(initMessages());
+  }, []);
+
   const messages = useSelector((state) => state.messages.messages);
 
   const selectChatExists = useMemo(() => selectIfChatExists(chatId), [chatId]);
@@ -18,7 +25,7 @@ function AddDeleteMessages() {
 
   const sendMessage = useCallback(
     (text, author) => {
-      dispatch(addMessageWithReply(chatId, text, author));
+      dispatch(addMessageFb(chatId, text, author));
     },
     [chatId]
   );
@@ -35,7 +42,7 @@ function AddDeleteMessages() {
       <div>
         {!!chatId && chatExist && (
           <>
-            {(messages[chatId] || []).map((message) => (
+            {(Object.values(messages[chatId] || {}) || []).map((message) => (
               <Message key={message.id} text={message.text} id={message.id} />
             ))}
             <FormCont onSubmit={handleAddMessage} />
