@@ -5,8 +5,9 @@ import { ref, set, onValue } from "@firebase/database";
 
 import ProfileView from "./profileView";
 import { db } from "../../services/firebase";
+import Message from "../Message";
 
-const ProfileCont = ({ onLogout }) => {
+export const ProfileCont = ({ onLogout }) => {
   const [value, setValue] = useState("");
   const [names, setNames] = useState();
 
@@ -60,3 +61,11 @@ const ProfileCont = ({ onLogout }) => {
 };
 
 export default ProfileCont;
+
+export const Text = ({ name }) => {
+  return (
+    <section>
+      <h3>HELLO, {name}</h3>
+    </section>
+  );
+};
